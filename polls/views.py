@@ -6,6 +6,7 @@ from .models import Question, Choice
 
 from django.views import generic    
 
+from django.utils import timezone
 # Create your views here.
 
 # view 1
@@ -19,7 +20,15 @@ class IndexView(generic.ListView):
     context_object_name = "latest_question_list"
 
     def get_queryset(self):
-        return Question.objects.order_by("-pub_date")[:5]
+        # return Question.objects.order_by("-pub_date")[:5]
+        """
+        Return the last five published questions (NOT including those set to be
+        published in the future).
+        """
+        return Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[
+            :5
+        ]
+
 
 ####################################################################################################
 # view 2
