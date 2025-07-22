@@ -1,0 +1,8 @@
+li a {
+  color: red;
+  /* background-color: red; */
+}
+
+body {
+  background: red url("images/background.png") no-repeat top left;
+}
